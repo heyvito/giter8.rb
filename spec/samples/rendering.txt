@@ -1,0 +1,6 @@
+$if(ok.truthy)$
+OK!
+$endif$
+$if(notok.truthy)$
+NOTOK
+$endif$

@@ -1,0 +1,10 @@
+name=Project Name
+nameUpperSnake=$name;format="upper,snake"$
+normalized=$name;format="normalize"$
+organization=com.foo
+package=$normalized;format="word"$
+minimumCoverage=10
+descriptions=Project descriptions
+namespace=foo
+productionCluster=production
+dashed-variable=value

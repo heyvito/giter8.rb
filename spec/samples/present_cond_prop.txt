@@ -1,0 +1,6 @@
+$if(non-existing.present)$
+$non-existing$
+$endif$
+$if(existing.present)$
+foobar
+$endif$

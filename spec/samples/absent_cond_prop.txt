@@ -1,0 +1,6 @@
+$if(non-existing.truthy)$
+$non-existing$
+$endif$
+$if(existing.truthy)$
+Yay!
+$endif$

@@ -1,0 +1,6 @@
+$if(parent.truthy)$
+Parent OK
+$if(child.truthy)$
+Child OK
+$endif$
+$endif$
