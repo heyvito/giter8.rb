@@ -1,8 +1,7 @@
-# Giter8
+# Giter8.rb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/giter8`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+go-giter8 implements [giter8](https://github.com/foundweekends/giter8)
+parsing and rendering for both single templates and directory structures.
 
 ## Installation
 
@@ -22,7 +21,60 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rendering a single template
+
+In order to render a single template, both a template string and a set of
+properties must be provided:
+
+```ruby
+require "giter8"
+
+template_string = <<~EOF
+Hi there, $name; format="capitalize"$!
+EOF
+
+props = Giter8.parse_props({
+    name: "fefo"
+})
+
+puts Giter8.render_template(template, props)
+
+# => "Hi there, Fefo!"
+```
+
+### Rendering a directory
+
+Rendering a directory requries a source directory, a destination, and a set of
+properties. Rendering directories also applies templates to file and directory
+names. For instance, take the following structure from [spec/samples/structure](spec/samples/structure):
+
+```
+structure
+├── README.md
+├── default.properties
+├── foo
+│   └── $project_name__normalize$.c
+└── header.h
+```
+
+Rendering it takes a single `Giter8` call:
+
+```ruby
+require "giter8"
+
+props = { project_name: "giter8.rb" }
+Giter8.render_directory("/path/to/spec/samples/structure", "/tmp/destination", props)
+```
+
+The following structure will exist at `/tmp/destination`:
+
+```
+output
+├── README.md
+├── foo
+│   └── giter8.rb.c
+└── header.h
+```
 
 ## Development
 
@@ -32,12 +84,34 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/giter8. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/giter8/blob/master/CODE_OF_CONDUCT.md).
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Bug reports and pull requests are welcome on GitHub at https://github.com/heyvito/giter8.rb. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/heyvito/giter8.rb/blob/master/CODE_OF_CONDUCT.md).
 
 ## Code of Conduct
 
-Everyone interacting in the Giter8 project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/giter8/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Giter8 project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/heyvito/giter8.rb/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+```
+The MIT License (MIT)
+
+Copyright (c) 2021 Victor Gama de Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```

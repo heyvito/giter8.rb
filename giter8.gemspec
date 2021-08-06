@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Victor Gama"]
   spec.email         = ["hey@vito.io"]
 
-  spec.summary       = "giter8.rb implements giter8 mechanisms for Ruby"
-  spec.description   = "giter8.rb implements giter8 mechanisms for Ruby"
+  spec.summary       = "giter8 implements giter8 rendering mechanisms"
+  spec.description   = "giter8 implements giter8 rendering mechanisms"
   spec.homepage      = "https://github.com/heyvito/giter8.rb"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.7")
