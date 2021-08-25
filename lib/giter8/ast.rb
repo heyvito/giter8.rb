@@ -13,7 +13,7 @@ module Giter8
 
     def_delegators :@nodes, :push, :<<, :each, :each_with_index, :empty?,
                    :length, :[], :last, :first, :map!, :map, :find, :shift,
-                   :unshift
+                   :unshift, :all?
 
     # Returns whether this AST node is composed exclusively by Literals
     def pure_literal?
